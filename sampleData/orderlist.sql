@@ -1,0 +1,6 @@
+INSERT INTO OrderList(ISBN, Amount, OrderID) VALUES (9780718143282, 1, 1);
+INSERT INTO OrderList(ISBN, Amount, OrderID) VALUES (9781471156267, 3, 1);
+INSERT INTO OrderList(ISBN, Amount, OrderID) VALUES (9781408891384, 1, 2);
+INSERT INTO OrderList(ISBN, Amount, OrderID) VALUES (9781408891384, 1, 3);
+
+select * from orderlist;

@@ -1,0 +1,13 @@
+version: "3.0"
+services:
+  postgres:
+    container_name: nsqcontainer
+    build: .
+    environment:
+      POSTGRES_USER: nsq
+      POSTGRES_PASSWORD: nsq
+      POSTGRES_HOST_AUTH_METHOD: trust
+
+    #only for testing, can be removed after
+    ports:
+      - 5432:5432

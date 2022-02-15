@@ -1,0 +1,18 @@
+--house of sky ...
+INSERT INTO Category_Book(ISBN, Cat1ID, Cat2ID, Cat3ID) VALUES (1635574072, 1, 1, 1);
+--Achilles
+INSERT INTO Category_Book(ISBN, Cat1ID, Cat2ID, Cat3ID) VALUES (9781408891384, 1, 1, 2);
+--Leviathian
+INSERT INTO Category_Book(ISBN, Cat1ID, Cat2ID, Cat3ID) VALUES (9781841499895, 1, 2, 3);
+--The ark																
+INSERT INTO Category_Book(ISBN, Cat1ID, Cat2ID, Cat3ID) VALUES (1798096366, 1, 2, 4);
+--ends with us															
+INSERT INTO Category_Book(ISBN, Cat1ID, Cat2ID, Cat3ID) VALUES (9781471156267, 2, 1, 5);
+--Rachels holiday																
+INSERT INTO Category_Book(ISBN, Cat1ID, Cat2ID, Cat3ID) VALUES (9780718143282, 2, 1, 6);
+--The Thursday murder club
+INSERT INTO Category_Book(ISBN, Cat1ID, Cat2ID, Cat3ID) VALUES (9780241988268, 2, 2, 7);
+--over my dead body														
+INSERT INTO Category_Book(ISBN, Cat1ID, Cat2ID, Cat3ID) VALUES (1444847953, 2, 2, 8);
+
+select * from Category_Book;

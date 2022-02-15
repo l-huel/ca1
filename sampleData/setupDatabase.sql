@@ -1,0 +1,32 @@
+CREATE TABLE "1st level Category" (Cat1ID SERIAL NOT NULL, Name varchar(255), PRIMARY KEY (Cat1ID));
+CREATE TABLE "2nd level category" (Cat2ID SERIAL NOT NULL, Name varchar(255), CategoryID int4 NOT NULL, PRIMARY KEY (Cat2ID));
+CREATE TABLE "3rd level category" (Cat3ID SERIAL NOT NULL, Name varchar(255), "2nd level categoryID" int4 NOT NULL, PRIMARY KEY (Cat3ID));
+CREATE TABLE Author (AuthorID SERIAL NOT NULL, "First name" varchar(255), "Last name" varchar(255), PRIMARY KEY (AuthorID));
+CREATE TABLE Book (ISBN char(13) NOT NULL, Title varchar(255), Price float4 NOT NULL, "Publication date" date, Language char(2) NOT NULL, Pages int4, "Cover style" char(1) NOT NULL, Stock int4, AuthorID int4 NOT NULL, PublisherPublisherID int4 NOT NULL, PRIMARY KEY (ISBN));
+COMMENT ON COLUMN Book."Cover style" IS 's: softcover
+h: hardcover';
+CREATE TABLE Book_Character (ISBN char(13) NOT NULL, CharacterID int4 NOT NULL, PRIMARY KEY (ISBN, CharacterID));
+CREATE TABLE Book_Genre (ISBN char(13) NOT NULL, GenreID int4 NOT NULL, PRIMARY KEY (ISBN, GenreID));
+CREATE TABLE Category_Book (ISBN char(13) NOT NULL, Cat1ID int4 NOT NULL, Cat2ID int4 NOT NULL, Cat3ID int4 NOT NULL, PRIMARY KEY (ISBN, Cat1ID, Cat2ID, Cat3ID));
+CREATE TABLE Character (CharacterID SERIAL NOT NULL, Name varchar(255), PRIMARY KEY (CharacterID));
+CREATE TABLE Customer (CustomerID SERIAL NOT NULL, "First name" varchar(255), "Last name" varchar(255), Street varchar(255), "Post code" numeric(4, 0), City varchar(255), "Telephone number" numeric(15, 0), "Payment method" int2, PRIMARY KEY (CustomerID));
+COMMENT ON COLUMN Customer."Payment method" IS 'magic numbers';
+CREATE TABLE Genre (GenreID SERIAL NOT NULL, Name varchar(255), PRIMARY KEY (GenreID));
+CREATE TABLE OrderList (ISBN char(13) NOT NULL, Amount int4 NOT NULL, OrderID int4 NOT NULL);
+CREATE TABLE Orders (OrderID SERIAL NOT NULL, "Date" date, CustomerID int4 NOT NULL, PRIMARY KEY (OrderID));
+CREATE TABLE Publisher (PublisherID SERIAL NOT NULL, Name varchar(255), City varchar(255), PRIMARY KEY (PublisherID));
+CREATE UNIQUE INDEX Customer_CustomerID ON Customer (CustomerID);
+ALTER TABLE Category_Book ADD CONSTRAINT FKCategory_B866202 FOREIGN KEY (Cat3ID) REFERENCES "3rd level category" (Cat3ID);
+ALTER TABLE Category_Book ADD CONSTRAINT FKCategory_B67385 FOREIGN KEY (Cat2ID) REFERENCES "2nd level category" (Cat2ID);
+ALTER TABLE Category_Book ADD CONSTRAINT FKCategory_B351513 FOREIGN KEY (Cat1ID) REFERENCES "1st level Category" (Cat1ID);
+ALTER TABLE Category_Book ADD CONSTRAINT FKCategory_B938357 FOREIGN KEY (ISBN) REFERENCES Book (ISBN);
+ALTER TABLE OrderList ADD CONSTRAINT FKOrderList333149 FOREIGN KEY (OrderID) REFERENCES Orders (OrderID);
+ALTER TABLE Book_Genre ADD CONSTRAINT FKBook_Genre971179 FOREIGN KEY (GenreID) REFERENCES Genre (GenreID);
+ALTER TABLE Book_Genre ADD CONSTRAINT FKBook_Genre140561 FOREIGN KEY (ISBN) REFERENCES Book (ISBN);
+ALTER TABLE Book_Character ADD CONSTRAINT FKBook_Chara25269 FOREIGN KEY (CharacterID) REFERENCES Character (CharacterID);
+ALTER TABLE Book_Character ADD CONSTRAINT FKBook_Chara209844 FOREIGN KEY (ISBN) REFERENCES Book (ISBN);
+ALTER TABLE "3rd level category" ADD CONSTRAINT "FK3rd level 13476" FOREIGN KEY ("2nd level categoryID") REFERENCES "2nd level category" (Cat2ID);
+ALTER TABLE "2nd level category" ADD CONSTRAINT "FK2nd level 872834" FOREIGN KEY (CategoryID) REFERENCES "1st level Category" (Cat1ID);
+ALTER TABLE Book ADD CONSTRAINT FKBook49315 FOREIGN KEY (AuthorID) REFERENCES Author (AuthorID);
+ALTER TABLE OrderList ADD CONSTRAINT FKOrderList741299 FOREIGN KEY (ISBN) REFERENCES Book (ISBN);
+
